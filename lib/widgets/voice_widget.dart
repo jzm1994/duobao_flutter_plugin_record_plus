@@ -150,7 +150,7 @@ class _VoiceWidgetState extends State<VoiceWidget> {
           ),
         );
       });
-      Overlay.of(context).insert(overlayEntry!);
+      Overlay.of(context)!.insert(overlayEntry!);
     }
   }
 

@@ -8,6 +8,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import cafe.adriel.androidaudioconverter.AndroidAudioConverter
+import cafe.adriel.androidaudioconverter.callback.IConvertCallback
+import cafe.adriel.androidaudioconverter.callback.ILoadCallback
+import cafe.adriel.androidaudioconverter.model.AudioFormat
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -17,10 +21,11 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
-import io.flutter.plugin.common.PluginRegistry.Registrar
 import record.wilson.flutter.com.flutter_plugin_record.utils.*
 import java.io.File
 import java.util.*
+
+
 class FlutterPluginRecordPlugin : FlutterPlugin, MethodCallHandler, ActivityAware ,PluginRegistry.RequestPermissionsResultListener {
 
     lateinit var channel: MethodChannel
@@ -36,13 +41,13 @@ class FlutterPluginRecordPlugin : FlutterPlugin, MethodCallHandler, ActivityAwar
     var activity:Activity? = null
 
     companion object {
-        //support embedding v1
-        @JvmStatic
-        fun registerWith(registrar: Registrar) {
-            val plugin = initPlugin(registrar.messenger())
-            plugin.activity= registrar.activity()
-            registrar.addRequestPermissionsResultListener(plugin)
-        }
+//        //support embedding v1
+//        @JvmStatic
+//        fun registerWith(registrar: Registrar) {
+//            val plugin = initPlugin(registrar.messenger())
+//            plugin.activity= registrar.activity()
+//            registrar.addRequestPermissionsResultListener(plugin)
+//        }
 
         private fun initPlugin(binaryMessenger: BinaryMessenger):FlutterPluginRecordPlugin {
             val channel = createMethodChannel(binaryMessenger)
